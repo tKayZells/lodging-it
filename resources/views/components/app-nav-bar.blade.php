@@ -8,18 +8,13 @@
             </div>
             <div class="hidden md:block h-full">
                 <div class="ml-4 flex items-center md:ml-6 h-full">
-                    <a href="#" class="h-full pt-6 text-black-300 border-b-2 border-black font-bold bg-gray-300 px-3 text-sm font-medium">Dashboard</a>
-                    <!-- {{ url('features') }} -->
-                    <x-nav-link href="{{ route('features') }}" :is-route="request()->routeIs('features')" >Features</x-nav-link>
-                    <x-nav-link href="{{ route('tests') }}" :is-route="request()->routeIs('tests')" >Test</x-nav-link>
-                    <!-- <a href="{{ route('features') }}" class="h-full pt-6 text-black-300 border-b-2 border-transparent hover:border-black px-3 text-sm font-medium">Features</a> -->
-                    <a href="#" class="h-full pt-6 text-black-300 border-b-2 border-transparent hover:border-black px-3 text-sm font-medium">Rooms</a>
-                    <a href="#" class="h-full pt-6 text-black-300 border-b-2 border-transparent hover:border-black px-3 text-sm font-medium">Customers</a>
-                    <a href="#" class="h-full pt-6 text-black-300 border-b-2 border-transparent hover:border-black px-3 text-sm font-medium">Orders</a>
+                    @foreach ($appLinks as $link)
+                        <x-nav-link href="{{ route($link) }}" :is-route="request()->routeIs($link)" >{{ $link }}</x-nav-link>
+                    @endforeach
                 </div>
             </div>
             <!--
-                MOBILE Menu
+                MOBILE Open menu
             -->
             <div class="-mr-2 flex md:hidden">
                 <button class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
@@ -35,15 +30,13 @@
         </div>
     </div>
     <!--
-        MOBILE Menu
+        MOBILE Links
      -->
     <div class="hidden md:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
-        <a href="#" class="text-black-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
-        <a href="#" class="text-black-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-        <a href="#" class="text-black-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
-        <a href="#" class="text-black-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Reports</a>
+            @foreach ($appLinks as $link)
+                <x-mobile-nav-link href="{{ route($link) }}" :is-route="request()->routeIs($link)" >{{ $link }}</x-nav-link>
+            @endforeach
       </div>
     </div>
 </nav>

@@ -17,7 +17,7 @@ use App\Http\Controllers\HotelController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name("home");
 
 Route::get("/test", [ FeatureController::class, "index" ])->name("tests");
 Route::get("/features", [ FeatureController::class, "index" ])->name("features");
@@ -26,11 +26,11 @@ Route::post("features/add", [ FeatureController::class, "store" ])->name("featur
 
 Route::get('/rooms', function () {
     return view('welcome');
-})->name("routes");
+})->name("rooms");
 
 Route::get('/rooms/add', function () {
     return view('welcome');
-})->name("routes.add");
+})->name("rooms.add");
 
 Route::get('/customers', function () {
     return view('welcome');

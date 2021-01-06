@@ -4,9 +4,8 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class NavLink extends Component
+class MobileNavLink extends Component
 {
-
 
     /**
      * @var string
@@ -24,13 +23,9 @@ class NavLink extends Component
         $this->isRoute = $isRoute;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|string
-     */
     public function render()
     {
-        return view('components.navigation.nav-link');
+        return view("components.navigation.mobile-nav-link");
     }
+
 }

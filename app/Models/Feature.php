@@ -21,6 +21,7 @@ class Feature extends Model
 
     protected static function booted()
     {
+        // Setup and Auto increment on Order column if not specified;
         static::creating(function ($feature) {
             if(is_null($feature->order))
             {
