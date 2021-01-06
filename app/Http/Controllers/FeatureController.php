@@ -16,7 +16,9 @@ class FeatureController extends Controller
      */
     public function index(Request $request)
     {
-        return view("features.index")->with("features", Feature::all());
+        return view("features.index")
+                ->with("features", Feature::all())
+                ->with("headers", [ "#", "Name", "Caption", "Icon", "Order" ] );
     }
 
     /**

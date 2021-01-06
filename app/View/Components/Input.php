@@ -37,7 +37,7 @@ class Input extends Component
 
     public function render()
     {
-        return view("components.inputs.input");
+        return view("components.inputs.index");
     }
 
 }

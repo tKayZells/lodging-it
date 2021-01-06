@@ -18,4 +18,12 @@ class Hotel extends Model
     {
         return $this->hasMany(Room::class, "hotel_id");
     }
+
+    /**
+     * A hotel displays many images
+     */
+    public function images()
+    {
+        return $this->hasMany(HotelImages::class, "hotel_id");
+    }
 }

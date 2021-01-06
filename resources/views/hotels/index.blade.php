@@ -1,32 +1,33 @@
-<x-app-layout header="Features">
+<x-app-layout header="Hotels">
     <div class="flex flex-row-reverse">
-        <a href="{{ route('features.add') }}" class="px-4 py-2 mb-4 bg-gray-700 text-white rounded-md transition duration-400 ease hover:bg-gray-500"> 
+        <a href="{{ route('hotels.add') }}" class="px-4 py-2 mb-4 bg-gray-700 text-white rounded-md transition duration-400 ease hover:bg-gray-500"> 
             <i class="fas fa-plus"></i>
-            <span class="pl-2">New Feature </span>
+            <span class="pl-2">New Hotel </span>
         </a>
     </div>
     <x-table :headers="$headers">
-        @foreach ($features as $feature)
+        @foreach ($hotels as $hotel)
             <tr>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    {{ $feature->id }}
+                    {{ $hotel->id }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">{{ $feature->name }}</div>
+                    <div class="text-sm text-gray-900">{{ $hotel->description }}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">{{ $feature->caption }}</div>
-                </td>
-
-                <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 h-10 w-10">
-                    <img class="h-10 w-10" src="{{ asset($feature->storage) }}" alt="{{ $feature->caption }}">
-                    </div>
-                </div>
+                    <div class="text-sm text-gray-900">{{ $hotel->name }}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">{{ $feature->order }}</div>
+                    <div class="text-sm text-gray-900">{{ $hotel->country }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900">{{ $hotel->city }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900">{{ $hotel->address }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900">{{ $hotel->phone }}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>

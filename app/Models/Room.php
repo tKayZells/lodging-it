@@ -20,7 +20,6 @@ class Room extends Model
     {
         return $this->belongsToMany(Feature::class, "room_features", "room_id");
     }
-
     
     /**
      * A Room belongs to one hotel
@@ -28,5 +27,13 @@ class Room extends Model
     public function hotel()
     {
         return $this->belongsTo(Hotel::class, "hotels", "id");
+    }
+
+    /**
+     * A room has many displayable images
+     */
+    public function images()
+    {
+        return $this->hasMany(RoomImages::class, "room_images", "room_id");
     }
 }
