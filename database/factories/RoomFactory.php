@@ -15,12 +15,12 @@ class RoomFactory extends Factory
         
         return [
             "identification" => $this->faker->word(),
-            "floor" => $this->faker->randomNumber(),
-            "type"=> $this->faker->word(),
+            "floor" => $this->faker->randomDigitNot(0),
+            "type"=> $this->faker->randomElement([ "Double", "Premium Double", "Executive", "Royal", "Premium", "Junior" ]),
             "description" => $this->faker->text(),
-            "adult_occupancy" => $this->faker->randomNumber(),
-            "child_occupancy" => $this->faker->randomNumber(),
-            "base_price" => $this->faker->randomNumber(),
+            "adult_occupancy" => $this->faker->randomDigitNot(0),
+            "child_occupancy" => $this->faker->randomDigitNot(0),
+            "base_price" => $this->faker->numerify("####"),
             "status" => $this->faker->boolean(),
         ];
     }

@@ -10,7 +10,16 @@ class Hotel extends Model
     use HasFactory;
     
     public $timestamps = false;
-    
+
+    protected $fillable = [
+        'name',
+        'description',
+        'country',
+        'city',
+        'address',
+        'phone'
+    ];
+
     /**
      * A hotel has multiple rooms
      */

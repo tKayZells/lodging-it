@@ -12,7 +12,15 @@ class Room extends Model
     
     public $timestamps = false;
 
-
+    protected $fillable = [
+        'hotel_id',
+        'type',
+        'description',
+        'adult_occupancy',
+        'child_occupancy',
+        'base_price'
+    ];
+    
     /**
      * A room can have many features
      */
@@ -35,5 +43,13 @@ class Room extends Model
     public function images()
     {
         return $this->hasMany(RoomImages::class, "room_images", "room_id");
+    }
+
+    /**
+     * A Roomtype has many rooms
+     */
+    public function roomspecifics()
+    {
+        return $this->hasMany(RoomSpecific::class, "room_specifics", "room_id");
     }
 }

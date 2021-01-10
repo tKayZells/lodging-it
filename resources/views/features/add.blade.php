@@ -1,6 +1,6 @@
 <x-app-layout header="Features">
     <div class="flex justify-center flex-col">
-        <p class="p-2 m-2 font-bold text-gray-700 capitalize">New Feature</p>    
+        <p class="p-2 m-2 text-xl font-bold text-gray-700 capitalize">New Feature</p>    
         <form method="POST" action="/features/add" enctype="multipart/form-data" class="p-4 m-2 border rounded-md">
             @csrf
             <div class="flex flex-col m-2 p-2">

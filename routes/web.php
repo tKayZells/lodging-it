@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RoomFeaturesController;
+use App\Http\Controllers\RoomSpecificsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,18 +22,22 @@ Route::get('/', function () {
     return view('welcome');
 })->name("home");
 
-Route::get("/test", [ FeatureController::class, "index" ])->name("tests");
 Route::get("/features", [ FeatureController::class, "index" ])->name("features");
 Route::get("/features/add", [ FeatureController::class, "add" ])->name("features.add");
 Route::post("features/add", [ FeatureController::class, "store" ])->name("features.store");
 
-Route::get('/rooms', function () {
-    return view('welcome');
-})->name("rooms");
+Route::get('/rooms', [ RoomController::class, "index" ] )->name("rooms");
+Route::get('/rooms/add', [ RoomController::class, "add" ] )->name("rooms.add");
+Route::post('/rooms/add', [ RoomController::class, "store" ] )->name("rooms.store");
 
-Route::get('/rooms/add', function () {
-    return view('welcome');
-})->name("rooms.add");
+Route::get('/rooms/add/{room}/specifics', [ RoomSpecificsController::class, "add" ])->name("room.specifics.add");
+Route::post('/rooms/add/specifics', [ RoomSpecificsController::class, "store" ])->name("room.specifics.store");
+Route::get('/rooms/add/{room}/features', [ RoomFeaturesController::class, "add" ])->name("room.features.add");
+Route::get('/rooms/add/features', [ RoomFeaturesController::class, "store" ])->name("room.features.store");
+
+Route::get("/hotels", [ HotelController::class, "index" ])->name("hotels");
+Route::get("/hotels/add", [ HotelController::class, "add" ])->name("hotels.add");
+Route::post("/hotels/add", [ HotelController::class, "store" ])->name("hotels.store");
 
 Route::get('/customers', function () {
     return view('welcome');
@@ -47,6 +54,3 @@ Route::get('/orders', function () {
 Route::get('/orders/add', function () {
     return view('welcome');
 })->name("orders.add");
-
-Route::get("/hotels", [ HotelController::class, "index" ])->name("hotels");
-Route::get("/hotels/add", [ HotelController::class, "add" ])->name("hotels.add");
