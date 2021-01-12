@@ -19,7 +19,7 @@ use App\Http\Controllers\RoomSpecificsController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return response()->redirectToRoute("features");
 })->name("home");
 
 Route::get("/features", [ FeatureController::class, "index" ])->name("features");
@@ -32,6 +32,10 @@ Route::post('/rooms/add', [ RoomController::class, "store" ] )->name("rooms.stor
 
 Route::get('/rooms/add/{room}/specifics', [ RoomSpecificsController::class, "add" ])->name("room.specifics.add");
 Route::post('/rooms/add/specifics', [ RoomSpecificsController::class, "store" ])->name("room.specifics.store");
+
+Route::get('/rooms/add/{room}/images', [ RoomSpecificsController::class, "add" ])->name("room.specifics.add");
+Route::post('/rooms/add/images', [ RoomSpecificsController::class, "store" ])->name("room.specifics.store");
+
 Route::get('/rooms/add/{room}/features', [ RoomFeaturesController::class, "add" ])->name("room.features.add");
 Route::get('/rooms/add/features', [ RoomFeaturesController::class, "store" ])->name("room.features.store");
 

@@ -25,10 +25,10 @@
                 </tr>
             @endforeach
         </x-table>
-        <form method="POST" action="/rooms/add/specifics" class="p-4 m-2">
+        <form method="POST" action="/rooms/add/specifics" class="p-4 m-2 border-t">
             @csrf
             <input type="hidden" name="room_id" value="{{ $id }}" />
-            <div class="flex flex-row justify-center items-center">
+            <div class="flex md:flex-row flex-col justify-center items-center">
                 <div class="flex flex-col m-2 p-2">
                     <x-input inputname="identification" inputtype="text" inputtext="Identification"></x-input>
                 </div>
@@ -39,13 +39,20 @@
                     <x-input inputname="extra_info" inputtype="text" inputtext="Extra info"></x-input>
                 </div>
                 <div class="m-2 p-2">
+                    <div class="py-5" ></div>
                     <button type="submit" class="px-4 py-2 bg-gray-700 text-white rounded-md transition duration-400 ease hover:bg-gray-500">
                         <i class="fas fa-plus mr-2"></i>
                         Add
                     </button>
                 </div>
+                <div class="m-2 p-2">
+                    <div class="py-5" ></div>
+                    <a href="{{ route('room.features.add', $id) }}" class="px-4 py-2 bg-gray-700 text-white rounded-md transition duration-400 ease hover:bg-gray-500">
+                        Room Features
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
             </div>
         </form>
-        {{ $id }}
     </div>
 </x-app-layout>

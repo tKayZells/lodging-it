@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Models\RoomSpecific;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class RoomSpecificsController extends Controller
 {
@@ -32,7 +31,6 @@ class RoomSpecificsController extends Controller
 
         $room_specifics = RoomSpecific::where('room_id', $room->id)->get();
 
-        dump($room_specifics);
         return view("specifics.add")
                 ->with("headers", $headers)
                 ->with("specifics", $room_specifics)
@@ -65,6 +63,6 @@ class RoomSpecificsController extends Controller
         RoomSpecific::create( $request->all() )
                         ->save();
 
-        return response()->redirectTo("room.specifics.add", [ "room" => Room::find($request->room_id) ] );
+        return response()->redirectToRoute("room.specifics.add", [ "room" => $request->room_id ] );
     }
 }
