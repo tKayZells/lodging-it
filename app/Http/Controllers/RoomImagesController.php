@@ -21,7 +21,7 @@ class RoomImagesController extends Controller
      */
     public function add( Request $request, Room $room )
     {
-        return view("welcome");
+        return view("rooms.images");
     }
 
     

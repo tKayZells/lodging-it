@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class RoomSpecificsController extends Controller
 {
-    public function index( Request $request )
-    {
-        return view("welcome");
-    }
-
     /**
      * Form to Attach a new Specific room to a room type
      * 
@@ -52,13 +47,6 @@ class RoomSpecificsController extends Controller
             'extra_info' => 'required',
             'room_id' => 'required|exists:App\Models\Room,id'
         ]); 
-        // dump($request->room_id);
-        // if ($validator->fails()) {
-        //     return redirect()
-        //                 ->redirectTo("room.specifics.add", [ "room" => Room::find($request->room_id) ] )
-        //                 ->withErrors($validator)
-        //                 ->withInput();
-        // }
 
         RoomSpecific::create( $request->all() )
                         ->save();

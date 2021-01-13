@@ -35,7 +35,7 @@ class Feature extends Model
      */
     public function rooms()
     {
-        return $this->belongsToMany(Room::class, "room_features", "features_id");
+        return $this->belongsToMany(Room::class, "room_features", "features_id", "room_id");
     }
 
 }

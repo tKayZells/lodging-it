@@ -5,6 +5,7 @@ use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomFeaturesController;
+use App\Http\Controllers\RoomImagesController;
 use App\Http\Controllers\RoomSpecificsController;
 
 /*
@@ -33,11 +34,11 @@ Route::post('/rooms/add', [ RoomController::class, "store" ] )->name("rooms.stor
 Route::get('/rooms/add/{room}/specifics', [ RoomSpecificsController::class, "add" ])->name("room.specifics.add");
 Route::post('/rooms/add/specifics', [ RoomSpecificsController::class, "store" ])->name("room.specifics.store");
 
-Route::get('/rooms/add/{room}/images', [ RoomSpecificsController::class, "add" ])->name("room.specifics.add");
-Route::post('/rooms/add/images', [ RoomSpecificsController::class, "store" ])->name("room.specifics.store");
+Route::get('/rooms/add/{room}/images', [ RoomImagesController::class, "add" ])->name("room.images.add");
+Route::post('/rooms/add/images', [ RoomImagesController::class, "store" ])->name("room.images.store");
 
 Route::get('/rooms/add/{room}/features', [ RoomFeaturesController::class, "add" ])->name("room.features.add");
-Route::get('/rooms/add/features', [ RoomFeaturesController::class, "store" ])->name("room.features.store");
+Route::post('/rooms/add/features', [ RoomFeaturesController::class, "store" ])->name("room.features.store");
 
 Route::get("/hotels", [ HotelController::class, "index" ])->name("hotels");
 Route::get("/hotels/add", [ HotelController::class, "add" ])->name("hotels.add");
