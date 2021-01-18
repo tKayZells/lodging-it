@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Lodging it</title>
 
+    <script src="https://kit.fontawesome.com/60c8a3dd5d.js" crossorigin="anonymous"></script>
+    {{ $scripts ?? '' }}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://kit.fontawesome.com/60c8a3dd5d.js" crossorigin="anonymous"></script>
 </head>
 <body class="min-h-screen bg-gray-100">
     <div id="app">
