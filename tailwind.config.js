@@ -16,6 +16,7 @@ module.exports = {
     variants: {
       extend: {
         zIndex: ['hover', 'group-hover'],
+        opacity: ['disabled']
       },
     },
     plugins: [

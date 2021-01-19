@@ -34,7 +34,7 @@ class Room extends Model
      */
     public function hotel()
     {
-        return $this->belongsTo(Hotel::class, "hotels", "id");
+        return $this->belongsTo(Hotel::class, "hotel_id", "id");
     }
 
     /**
@@ -42,7 +42,7 @@ class Room extends Model
      */
     public function images()
     {
-        return $this->hasMany(RoomImages::class, "room_images", "room_id");
+        return $this->hasMany(RoomImages::class, "room_id", "id");
     }
 
     /**
@@ -50,6 +50,6 @@ class Room extends Model
      */
     public function roomspecifics()
     {
-        return $this->hasMany(RoomSpecific::class, "room_specifics", "room_id");
+        return $this->hasMany(RoomSpecific::class, "room_id", "id");
     }
 }

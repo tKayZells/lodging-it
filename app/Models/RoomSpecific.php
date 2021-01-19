@@ -25,7 +25,7 @@ class RoomSpecific extends Model
      */
     public function room()
     {
-        return $this->belongsTo(Room::class, "rooms", "id");
+        return $this->belongsTo(Room::class, "room_id", "id");
     }
 
 }

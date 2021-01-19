@@ -1916,13 +1916,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["file"],
-  mounted: function mounted() {
-    console.log("mounted file row");
-  },
+  props: ["file", "idx"],
   methods: {
     FormatSize: function FormatSize(size) {
       return size > 1024 ? size > 1048576 ? Math.round(size / 1048576) + "mb" : Math.round(size / 1024) + "kb" : file.size + "b";
+    },
+    DeleteFile: function DeleteFile() {
+      this.$emit('delete-file', this.file, this.idx);
     }
   }
 });
@@ -1976,17 +1976,15 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["action", 'id'],
+  props: ["action"],
   components: {
     FileRowComponent: _FileRowCommponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
-      files: []
+      files: [],
+      isDisabled: false
     };
-  },
-  mounted: function mounted() {
-    console.log("Example component mounted");
   },
   methods: {
     OnImagesChange: function OnImagesChange(e) {
@@ -2004,8 +2002,62 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         _iterator.f();
       }
     },
+    OnFormSubmit: function OnFormSubmit(e) {
+      var _this = this;
+
+      e.preventDefault();
+      this.isDisabled = true;
+      var fData = new FormData();
+      var formInputs = document.querySelectorAll("form#file_upload > input");
+
+      var _iterator2 = _createForOfIteratorHelper(formInputs),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var input = _step2.value;
+          fData.append(input.name, input.value);
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      var _iterator3 = _createForOfIteratorHelper(this.files),
+          _step3;
+
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var file = _step3.value;
+          fData.append("files[]", file);
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+
+      fetch(this.action, {
+        method: "POST",
+        body: fData
+      }).then(function (resp) {
+        console.log(resp);
+
+        if (resp.status == 200) {
+          location.reload();
+        }
+      })["catch"](function (resp) {
+        console.log(resp);
+        _this.isDisabled = false;
+      });
+    },
     ShowSelectImages: function ShowSelectImages(e) {
+      if (this.isDisabled) return;
       this.$refs.images.click();
+    },
+    OnDeleteFile: function OnDeleteFile(file, idx) {
+      this.files.splice(idx, 1);
     }
   }
 });
@@ -19667,29 +19719,25 @@ var render = function() {
         "flex justify-between bg-gray-700 text-white text-sm p-4 m-2 rounded-lg relative group hover:bg-gray-300"
     },
     [
-      _c("p", [_vm._v(_vm._s(_vm.file.name))]),
+      _c("p", { staticClass: "w-2/3 truncate" }, [
+        _vm._v(_vm._s(_vm.file.name))
+      ]),
       _vm._v(" "),
       _c("p", [_vm._v(_vm._s(_vm.FormatSize(_vm.file.size)))]),
       _vm._v(" "),
-      _vm._m(0)
+      _c(
+        "a",
+        {
+          staticClass:
+            "cursor-pointer absolute left-1/2 text-gray-700 -z-10 group-hover:z-10",
+          on: { click: _vm.DeleteFile }
+        },
+        [_c("i", { staticClass: "fas fa-trash fa-2x" })]
+      )
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass:
-          "cursor-pointer absolute left-1/2 text-gray-700 -z-10 group-hover:z-10"
-      },
-      [_c("i", { staticClass: "fas fa-trash fa-2x" })]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -19715,18 +19763,15 @@ var render = function() {
     "form",
     {
       attrs: {
+        id: "file_upload",
         method: "POST",
         action: _vm.action,
         enctype: "multipart/form-data"
-      }
+      },
+      on: { submit: _vm.OnFormSubmit }
     },
     [
       _vm._t("default"),
-      _vm._v(" "),
-      _c("input", {
-        attrs: { type: "hidden", name: "id" },
-        domProps: { value: _vm.id }
-      }),
       _vm._v(" "),
       _c(
         "div",
@@ -19752,7 +19797,8 @@ var render = function() {
                 _vm._l(_vm.files, function(file, idx) {
                   return _c("file-row-component", {
                     key: idx,
-                    attrs: { file: file }
+                    attrs: { idx: idx, file: file },
+                    on: { "delete-file": _vm.OnDeleteFile }
                   })
                 }),
                 1
@@ -19760,7 +19806,7 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "md:col-span-1 py-4 m-2" }, [
+          _c("div", { staticClass: "md:col-span-2 py-4 m-2" }, [
             _c("div", { staticClass: "p-0" }, [
               _c("input", {
                 ref: "images",
@@ -19781,20 +19827,26 @@ var render = function() {
                   _c("i", { staticClass: "far fa-folder-open mr-2" }),
                   _vm._v("\n                    Select Files\n                ")
                 ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "disabled:opacity-50 px-4 py-2 bg-gray-700 text-white rounded-md transition duration-400 ease ml-2",
+                  class: { "hover:bg-gray-500": !_vm.isDisabled },
+                  attrs: { type: "submit", disabled: _vm.isDisabled }
+                },
+                [
+                  _vm._v(
+                    "\n                    Upload Files \n                    "
+                  ),
+                  _c("i", { staticClass: "fas fa-cloud-upload-alt ml-2" })
+                ]
               )
             ])
           ])
         ]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass:
-            "px-4 py-2 bg-gray-700 text-white rounded-md transition duration-400 ease hover:bg-gray-500 mr-2",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("\n        Add Images\n    ")]
       )
     ],
     2

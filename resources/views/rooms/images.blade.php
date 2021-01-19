@@ -11,8 +11,9 @@
                 </ul>
             </div>
         @endif
-        <file-upload-component action="/rooms/add/images" id="{{ $id }}" >
+        <file-upload-component action="/rooms/add/images" >
             @csrf
+            <input type="hidden" name="room_id" value="{{ $id }}" />
         </file-upload-component>
         <x-table :headers="$headers">
         </x-table>
